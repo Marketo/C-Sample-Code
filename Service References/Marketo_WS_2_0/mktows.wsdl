@@ -1,0 +1,1430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.marketo.com/mktows/" xmlns:xs="http://www.w3.org/2001/XMLSchema" name="mktows" targetNamespace="http://www.marketo.com/mktows/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema targetNamespace="http://www.marketo.com/mktows/">
+      <xs:simpleType name="LeadKeyRef">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="IDNUM" />
+          <xs:enumeration value="COOKIE" />
+          <xs:enumeration value="EMAIL" />
+          <xs:enumeration value="LEADOWNEREMAIL" />
+          <xs:enumeration value="SFDCACCOUNTID" />
+          <xs:enumeration value="SFDCCONTACTID" />
+          <xs:enumeration value="SFDCLEADID" />
+          <xs:enumeration value="SFDCLEADOWNERID" />
+          <xs:enumeration value="SFDCOPPTYID" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="LeadSyncStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="CREATED" />
+          <xs:enumeration value="UPDATED" />
+          <xs:enumeration value="FAILED" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="ActivityType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="VisitWebpage" />
+          <xs:enumeration value="FillOutForm" />
+          <xs:enumeration value="ClickLink" />
+          <xs:enumeration value="SendEmail" />
+          <xs:enumeration value="EmailDelivered" />
+          <xs:enumeration value="EmailBounced" />
+          <xs:enumeration value="UnsubscribeEmail" />
+          <xs:enumeration value="OpenEmail" />
+          <xs:enumeration value="ClickEmail" />
+          <xs:enumeration value="NewLead" />
+          <xs:enumeration value="ChangeDataValue" />
+          <xs:enumeration value="LeadAssigned" />
+          <xs:enumeration value="NewSFDCOpprtnty" />
+          <xs:enumeration value="Wait" />
+          <xs:enumeration value="RunSubflow" />
+          <xs:enumeration value="RemoveFromFlow" />
+          <xs:enumeration value="PushLeadToSales" />
+          <xs:enumeration value="CreateTask" />
+          <xs:enumeration value="ConvertLead" />
+          <xs:enumeration value="ChangeScore" />
+          <xs:enumeration value="ChangeOwner" />
+          <xs:enumeration value="AddToList" />
+          <xs:enumeration value="RemoveFromList" />
+          <xs:enumeration value="SFDCActivity" />
+          <xs:enumeration value="EmailBouncedSoft" />
+          <xs:enumeration value="PushLeadUpdatesToSales" />
+          <xs:enumeration value="DeleteLeadFromSales" />
+          <xs:enumeration value="SFDCActivityUpdated" />
+          <xs:enumeration value="SFDCMergeLeads" />
+          <xs:enumeration value="MergeLeads" />
+          <xs:enumeration value="ResolveConflicts" />
+          <xs:enumeration value="AssocWithOpprtntyInSales" />
+          <xs:enumeration value="DissocFromOpprtntyInSales" />
+          <xs:enumeration value="UpdateOpprtntyInSales" />
+          <xs:enumeration value="DeleteLead" />
+          <xs:enumeration value="SendAlert" />
+          <xs:enumeration value="SendSalesEmail" />
+          <xs:enumeration value="OpenSalesEmail" />
+          <xs:enumeration value="ClickSalesEmail" />
+          <xs:enumeration value="AddtoSFDCCampaign" />
+          <xs:enumeration value="RemoveFromSFDCCampaign" />
+          <xs:enumeration value="ChangeStatusInSFDCCampaign" />
+          <xs:enumeration value="ReceiveSalesEmail" />
+          <xs:enumeration value="InterestingMoment" />
+          <xs:enumeration value="RequestCampaign" />
+          <xs:enumeration value="SalesEmailBounced" />
+          <xs:enumeration value="ChangeLeadPartition" />
+          <xs:enumeration value="ChangeRevenueStage" />
+          <xs:enumeration value="ChangeRevenueStageManually" />
+          <xs:enumeration value="ComputeDataValue" />
+          <xs:enumeration value="ChangeStatusInProgression" />
+          <xs:enumeration value="ChangeFieldInProgram" />
+          <xs:enumeration value="EnrichWithDatacom" />
+          <xs:enumeration value="ChangeSegment" />
+          <xs:enumeration value="ResolveRuleset" />
+          <xs:enumeration value="SmartCampaignTest" />
+          <xs:enumeration value="SmartCampaignTestTrigger" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="ForeignSysType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="CUSTOM" />
+          <xs:enumeration value="SFDC" />
+          <xs:enumeration value="NETSUITE" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="ReqCampSourceType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="MKTOWS" />
+          <xs:enumeration value="SALES" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="ListKeyType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="MKTOLISTNAME" />
+          <xs:enumeration value="MKTOSALESUSERID" />
+          <xs:enumeration value="SFDCLEADOWNERID" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="ListOperationType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="ADDTOLIST" />
+          <xs:enumeration value="CLEARLIST" />
+          <xs:enumeration value="ISMEMBEROFLIST" />
+          <xs:enumeration value="REMOVEFROMLIST" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="SyncOperationEnum">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="UPSERT" />
+          <xs:enumeration value="INSERT" />
+          <xs:enumeration value="UPDATE" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="SyncStatusEnum">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="CREATED" />
+          <xs:enumeration value="UPDATED" />
+          <xs:enumeration value="DELETED" />
+          <xs:enumeration value="FAILED" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="LeadMergeStatusEnum">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="MERGED" />
+          <xs:enumeration value="FAILED" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="MObjStatusEnum">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="CREATED" />
+          <xs:enumeration value="UPDATED" />
+          <xs:enumeration value="DELETED" />
+          <xs:enumeration value="FAILED" />
+          <xs:enumeration value="UNCHANGED" />
+          <xs:enumeration value="SKIPPED" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="MObjectTypeEnum">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Opportunity" />
+          <xs:enumeration value="OpportunityLeadRole" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="ComparisonEnum">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="EQ" />
+          <xs:enumeration value="NE" />
+          <xs:enumeration value="LT" />
+          <xs:enumeration value="LE" />
+          <xs:enumeration value="GT" />
+          <xs:enumeration value="GE" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="ImportToListStatusEnum">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="PROCESSING" />
+          <xs:enumeration value="COMPLETE" />
+          <xs:enumeration value="FAILED" />
+          <xs:enumeration value="CANCELED" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="ImportToListModeEnum">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="UPSERTLEADS" />
+          <xs:enumeration value="LISTONLY" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:complexType name="ArrayOfString">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="stringItem" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ArrayOfInteger">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="integerItem" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ArrayOfActivityType">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="activityType" type="tns:ActivityType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ActivityTypeFilter">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="includeTypes" type="tns:ArrayOfActivityType" />
+          <xs:element minOccurs="0" maxOccurs="1" name="excludeTypes" type="tns:ArrayOfActivityType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Attrib">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="name" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="value" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ArrayOfAttrib">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="attrib" type="tns:Attrib" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Attribute">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="attrName" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="attrType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="attrValue" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ArrayOfAttribute">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="attribute" type="tns:Attribute" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ArrayOfKeyList">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="keyList" type="tns:ArrayOfAttribute" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="LeadRecord">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="Id" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="Email" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="ForeignSysPersonId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="ForeignSysType" nillable="true" type="tns:ForeignSysType" />
+          <xs:element minOccurs="0" maxOccurs="1" name="leadAttributeList" nillable="true" type="tns:ArrayOfAttribute" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ArrayOfLeadRecord">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="leadRecord" type="tns:LeadRecord" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ActivityRecord">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="id" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="activityDateTime" type="xs:dateTime" />
+          <xs:element minOccurs="1" maxOccurs="1" name="activityType" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="mktgAssetName" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="activityAttributes" nillable="true" type="tns:ArrayOfAttribute" />
+          <xs:element minOccurs="0" maxOccurs="1" name="campaign" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="personName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="mktPersonId" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="foreignSysId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="orgName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="foreignSysOrgId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CampaignRecord">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="id" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="name" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="description" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ArrayOfCampaignRecord">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="campaignRecord" type="tns:CampaignRecord" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="LeadChangeRecord">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="id" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="activityDateTime" type="xs:dateTime" />
+          <xs:element minOccurs="1" maxOccurs="1" name="activityType" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="mktgAssetName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="activityAttributes" nillable="true" type="tns:ArrayOfAttribute" />
+          <xs:element minOccurs="0" maxOccurs="1" name="campaign" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="mktPersonId" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ArrayOfLeadChangeRecord">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="leadChangeRecord" type="tns:LeadChangeRecord" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ArrayOfActivityRecord">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="activityRecord" type="tns:ActivityRecord" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="LeadKey">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="keyType" type="tns:LeadKeyRef" />
+          <xs:element minOccurs="1" maxOccurs="1" name="keyValue" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ArrayOfLeadKey">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="leadKey" type="tns:LeadKey" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="LeadStatus">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="leadKey" type="tns:LeadKey" />
+          <xs:element minOccurs="1" maxOccurs="1" name="status" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ArrayOfLeadStatus">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="leadStatus" type="tns:LeadStatus" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ListKey">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="keyType" type="tns:ListKeyType" />
+          <xs:element minOccurs="1" maxOccurs="1" name="keyValue" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="MObject">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="type" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="externalKey" type="tns:Attrib" />
+          <xs:element minOccurs="0" maxOccurs="1" name="createdAt" type="xs:dateTime" />
+          <xs:element minOccurs="0" maxOccurs="1" name="updatedAt" type="xs:dateTime" />
+          <xs:element minOccurs="0" maxOccurs="1" name="attribList" type="tns:ArrayOfAttrib" />
+          <xs:element minOccurs="0" maxOccurs="1" name="associationList" type="tns:ArrayOfMObjAssociation" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ArrayOfMObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="mObject" type="tns:MObject" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="MObjAssociation">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="mObjType" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="externalKey" type="tns:Attrib" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ArrayOfMObjAssociation">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="mObjAssociation" type="tns:MObjAssociation" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="MObjStatus">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="externalKey" type="tns:Attrib" />
+          <xs:element minOccurs="1" maxOccurs="1" name="status" type="tns:MObjStatusEnum" />
+          <xs:element minOccurs="0" maxOccurs="1" name="error" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ArrayOfMObjStatus">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="mObjStatus" type="tns:MObjStatus" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="MObjCriteria">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="attrName" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="comparison" type="tns:ComparisonEnum" />
+          <xs:element minOccurs="1" maxOccurs="1" name="attrValue" type="xs:anySimpleType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ArrayOfMObjCriteria">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="mObjCriteria" type="tns:MObjCriteria" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="MObjectMetadata">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="name" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="isCustom" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="isVirtual" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="fieldList" type="tns:ArrayOfMObjFieldMetadata" />
+          <xs:element minOccurs="1" maxOccurs="1" name="updatedAt" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="MObjFieldMetadata">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="name" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="displayName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="sourceObject" nillable="true" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="dataType" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="size" nillable="true" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="isReadonly" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="isUpdateBlocked" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="isName" nillable="true" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="isPrimaryKey" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="isCustom" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="isDynamic" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="dynamicFieldRef" nillable="true" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="updatedAt" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ArrayOfMObjFieldMetadata">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="field" type="tns:MObjFieldMetadata" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="StreamPosition">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="latestCreatedAt" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" maxOccurs="1" name="oldestCreatedAt" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" maxOccurs="1" name="activityCreatedAt" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" maxOccurs="1" name="offset" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SyncStatus">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="leadId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="status" type="tns:LeadSyncStatus" />
+          <xs:element minOccurs="0" maxOccurs="1" name="error" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ArrayOfSyncStatus">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="syncStatus" type="tns:SyncStatus" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ArrayOfBase64Binary">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="base64Binary" type="xs:base64Binary" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="VersionedItem">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="id" type="xs:integer" />
+          <xs:element minOccurs="1" maxOccurs="1" name="name" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="type" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="timestamp" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ArrayOfVersionedItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="versionedItem" type="tns:VersionedItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="CustomObj">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="customObjKeyList" nillable="true" type="tns:ArrayOfAttribute" />
+          <xs:element minOccurs="0" maxOccurs="1" name="customObjAttributeList" nillable="true" type="tns:ArrayOfAttribute" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ArrayOfCustomObj">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="customObj" type="tns:CustomObj" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SyncCustomObjStatus">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="objTypeName" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="customObjKeyList" nillable="true" type="tns:ArrayOfAttribute" />
+          <xs:element minOccurs="1" maxOccurs="1" name="status" type="tns:SyncStatusEnum" />
+          <xs:element minOccurs="0" maxOccurs="1" name="error" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ArrayOfSyncCustomObjStatus">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="syncCustomObjStatus" type="tns:SyncCustomObjStatus" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="MergeStatus">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="winningLeadId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="losingLeadIdList" nillable="true" type="tns:ArrayOfInteger" />
+          <xs:element minOccurs="1" maxOccurs="1" name="status" type="tns:LeadMergeStatusEnum" />
+          <xs:element minOccurs="0" maxOccurs="1" name="error" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="LeadSelector" abstract="true" />
+      <xs:complexType name="LastUpdateAtSelector">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:LeadSelector">
+            <xs:sequence>
+              <xs:element minOccurs="0" maxOccurs="1" name="latestUpdatedAt" nillable="true" type="xs:dateTime" />
+              <xs:element minOccurs="1" maxOccurs="1" name="oldestUpdatedAt" type="xs:dateTime" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="StaticListSelector">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:LeadSelector">
+            <xs:sequence>
+              <xs:element minOccurs="0" maxOccurs="1" name="staticListName" nillable="true" type="xs:string" />
+              <xs:element minOccurs="0" maxOccurs="1" name="staticListId" nillable="true" type="xs:int" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="LeadKeySelector">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:LeadSelector">
+            <xs:sequence>
+              <xs:element minOccurs="1" maxOccurs="1" name="keyType" type="tns:LeadKeyRef" />
+              <xs:element minOccurs="1" maxOccurs="1" name="keyValues" type="tns:ArrayOfString" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="ParamsDeleteMObjects">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="mObjectList" type="tns:ArrayOfMObject" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParamsDescribeMObject">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="objectName" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParamsGetMObjects">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="type" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="id" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="externalKey" type="tns:Attrib" />
+          <xs:element minOccurs="0" maxOccurs="1" name="mObjCriteriaList" type="tns:ArrayOfMObjCriteria" />
+          <xs:element minOccurs="0" maxOccurs="1" name="mObjAssociationList" type="tns:ArrayOfMObjAssociation" />
+          <xs:element minOccurs="0" maxOccurs="1" name="streamPosition" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParamsListMObjects">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="ParamsSyncMObjects">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="mObjectList" type="tns:ArrayOfMObject" />
+          <xs:element minOccurs="1" maxOccurs="1" name="operation" type="tns:SyncOperationEnum" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParamsGetCampaignsForSource">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="source" type="tns:ReqCampSourceType" />
+          <xs:element minOccurs="0" maxOccurs="1" name="name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="exactName" nillable="true" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParamsGetImportToListStatus">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="programName" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="listName" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParamsGetLead">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="leadKey" type="tns:LeadKey" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParamsGetLeadActivity">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="leadKey" type="tns:LeadKey" />
+          <xs:element minOccurs="0" maxOccurs="1" name="activityFilter" nillable="true" type="tns:ActivityTypeFilter" />
+          <xs:element minOccurs="0" maxOccurs="1" name="startPosition" nillable="true" type="tns:StreamPosition" />
+          <xs:element minOccurs="0" maxOccurs="1" name="batchSize" nillable="true" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParamsGetLeadChanges">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="startPosition" type="tns:StreamPosition" />
+          <xs:element minOccurs="0" maxOccurs="1" name="activityFilter" nillable="true" type="tns:ActivityTypeFilter" />
+          <xs:element minOccurs="0" maxOccurs="1" name="batchSize" nillable="true" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParamsGetMultipleLeads">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="leadSelector" type="tns:LeadSelector" />
+          <xs:element minOccurs="0" maxOccurs="1" name="lastUpdatedAt" type="xs:dateTime" />
+          <xs:element minOccurs="0" maxOccurs="1" name="streamPosition" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="batchSize" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="includeAttributes" type="tns:ArrayOfString" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParamsImportToList">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="programName" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="importFileHeader" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="importFileRows" type="tns:ArrayOfString" />
+          <xs:element minOccurs="1" maxOccurs="1" name="importListMode" type="tns:ImportToListModeEnum" />
+          <xs:element minOccurs="1" maxOccurs="1" name="listName" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="clearList" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="campaignName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParamsListOperation">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="listOperation" type="tns:ListOperationType" />
+          <xs:element minOccurs="1" maxOccurs="1" name="listKey" type="tns:ListKey" />
+          <xs:element minOccurs="1" maxOccurs="1" name="listMemberList" type="tns:ArrayOfLeadKey" />
+          <xs:element minOccurs="0" maxOccurs="1" name="strict" nillable="true" type="xs:boolean" />
+          <xs:element minOccurs="0" maxOccurs="1" name="skipActivityLog" nillable="true" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParamsRequestCampaign">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="source" type="tns:ReqCampSourceType" />
+          <xs:element minOccurs="0" maxOccurs="1" name="campaignId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="leadList" nillable="true" type="tns:ArrayOfLeadKey" />
+          <xs:element minOccurs="0" maxOccurs="1" name="programName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="campaignName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="programTokenList" nillable="true" type="tns:ArrayOfAttrib" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParamsScheduleCampaign">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="programName" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="campaignName" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="campaignRunAt" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" maxOccurs="1" name="programTokenList" nillable="true" type="tns:ArrayOfAttrib" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParamsSyncLead">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="leadRecord" type="tns:LeadRecord" />
+          <xs:element minOccurs="1" maxOccurs="1" name="returnLead" type="xs:boolean" />
+          <xs:element minOccurs="0" maxOccurs="1" name="marketoCookie" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParamsSyncMultipleLeads">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="leadRecordList" type="tns:ArrayOfLeadRecord" />
+          <xs:element minOccurs="0" maxOccurs="1" name="dedupEnabled" nillable="true" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParamsSyncCustomObjects">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="objTypeName" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="customObjList" type="tns:ArrayOfCustomObj" />
+          <xs:element minOccurs="0" maxOccurs="1" name="operation" nillable="true" type="tns:SyncOperationEnum" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParamsDeleteCustomObjects">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="objTypeName" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="customObjKeyLists" type="tns:ArrayOfKeyList" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParamsGetCustomObjects">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="objTypeName" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="streamPosition" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="batchSize" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="customObjKeyList" nillable="true" type="tns:ArrayOfAttribute" />
+          <xs:element minOccurs="1" maxOccurs="1" name="includeAttributes" type="tns:ArrayOfString" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParamsMergeLeads">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="winningLeadKeyList" type="tns:ArrayOfAttribute" />
+          <xs:element minOccurs="1" maxOccurs="1" name="losingLeadKeyLists" type="tns:ArrayOfKeyList" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ResultDeleteMObjects">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="mObjStatusList" type="tns:ArrayOfMObjStatus" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ResultDescribeMObject">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="metadata" type="tns:MObjectMetadata" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ResultGetMObjects">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="returnCount" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="hasMore" type="xs:boolean" />
+          <xs:element minOccurs="1" maxOccurs="1" name="newStreamPosition" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="mObjectList" type="tns:ArrayOfMObject" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ResultListMObjects">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="objects" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ResultSyncMObjects">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="mObjStatusList" type="tns:ArrayOfMObjStatus" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="LeadActivityList">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="returnCount" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="remainingCount" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="newStartPosition" type="tns:StreamPosition" />
+          <xs:element minOccurs="0" maxOccurs="1" name="activityRecordList" nillable="true" type="tns:ArrayOfActivityRecord" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ResultGetCampaignsForSource">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="returnCount" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="campaignRecordList" nillable="true" type="tns:ArrayOfCampaignRecord" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ResultGetImportToListStatus">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="status" type="tns:ImportToListStatusEnum" />
+          <xs:element minOccurs="0" maxOccurs="1" name="startedTime" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" maxOccurs="1" name="endedTime" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" maxOccurs="1" name="estimatedTime" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="estimatedRows" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="rowsImported" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="rowsFailed" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="rowsIgnored" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="importSummary" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ResultGetLeadChanges">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="returnCount" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="remainingCount" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="newStartPosition" type="tns:StreamPosition" />
+          <xs:element minOccurs="0" maxOccurs="1" name="leadChangeRecordList" nillable="true" type="tns:ArrayOfLeadChangeRecord" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ResultGetLead">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="count" type="xs:int" />
+          <xs:element minOccurs="0" maxOccurs="1" name="leadRecordList" nillable="true" type="tns:ArrayOfLeadRecord" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ResultListOperation">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="success" type="xs:boolean" />
+          <xs:element minOccurs="0" maxOccurs="1" name="statusList" nillable="true" type="tns:ArrayOfLeadStatus" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ResultGetMultipleLeads">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="returnCount" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="remainingCount" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="newStreamPosition" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="leadRecordList" nillable="true" type="tns:ArrayOfLeadRecord" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ResultImportToList">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="importStatus" type="tns:ImportToListStatusEnum" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ResultRequestCampaign">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="success" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ResultScheduleCampaign">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="success" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ResultSyncLead">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="leadId" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="syncStatus" type="tns:SyncStatus" />
+          <xs:element minOccurs="0" maxOccurs="1" name="leadRecord" nillable="true" type="tns:LeadRecord" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ResultSyncMultipleLeads">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="syncStatusList" type="tns:ArrayOfSyncStatus" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ResultSyncCustomObjects">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="syncCustomObjStatusList" type="tns:ArrayOfSyncCustomObjStatus" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ResultDeleteCustomObjects">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="deleteCustomObjStatusList" type="tns:ArrayOfSyncCustomObjStatus" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ResultGetCustomObjects">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="objTypeName" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="returnCount" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="remainingCount" type="xs:int" />
+          <xs:element minOccurs="1" maxOccurs="1" name="newStreamPosition" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="customObjList" nillable="true" type="tns:ArrayOfCustomObj" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ResultMergeLeads">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="mergeStatus" type="tns:MergeStatus" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SuccessDeleteMObjects">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="result" type="tns:ResultDeleteMObjects" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SuccessDescribeMObject">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="result" type="tns:ResultDescribeMObject" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SuccessGetMObjects">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="result" type="tns:ResultGetMObjects" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SuccessListMObjects">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="result" type="tns:ResultListMObjects" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SuccessSyncMObjects">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="result" type="tns:ResultSyncMObjects" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SuccessGetCampaignsForSource">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="result" type="tns:ResultGetCampaignsForSource" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SuccessGetImportToListStatus">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="result" type="tns:ResultGetImportToListStatus" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SuccessGetLead">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="result" type="tns:ResultGetLead" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SuccessGetLeadActivity">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="leadActivityList" type="tns:LeadActivityList" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SuccessGetLeadChanges">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="result" type="tns:ResultGetLeadChanges" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SuccessGetMultipleLeads">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="result" type="tns:ResultGetMultipleLeads" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SuccessImportToList">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="result" type="tns:ResultImportToList" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SuccessListOperation">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="result" type="tns:ResultListOperation" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SuccessRequestCampaign">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="result" type="tns:ResultRequestCampaign" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SuccessScheduleCampaign">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="result" type="tns:ResultScheduleCampaign" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SuccessSyncLead">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="result" type="tns:ResultSyncLead" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SuccessSyncMultipleLeads">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="result" type="tns:ResultSyncMultipleLeads" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SuccessSyncCustomObjects">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="result" type="tns:ResultSyncCustomObjects" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SuccessDeleteCustomObjects">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="result" type="tns:ResultDeleteCustomObjects" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SuccessGetCustomObjects">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="result" type="tns:ResultGetCustomObjects" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SuccessMergeLeads">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="result" type="tns:ResultMergeLeads" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="AuthenticationHeaderInfo">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="mktowsUserId" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="requestSignature" type="xs:string" />
+          <xs:element minOccurs="1" maxOccurs="1" name="requestTimestamp" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="audit" type="xs:string" />
+          <xs:element minOccurs="0" maxOccurs="1" name="mode" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="MktowsContextHeaderInfo">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="1" name="targetWorkspace" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="AuthenticationHeader" type="tns:AuthenticationHeaderInfo" />
+      <xs:element name="MktowsContextHeader" type="tns:MktowsContextHeaderInfo" />
+      <xs:element name="paramsDeleteMObjects" type="tns:ParamsDeleteMObjects" />
+      <xs:element name="paramsDescribeMObject" type="tns:ParamsDescribeMObject" />
+      <xs:element name="paramsGetMObjects" type="tns:ParamsGetMObjects" />
+      <xs:element name="paramsSyncMObjects" type="tns:ParamsSyncMObjects" />
+      <xs:element name="paramsGetCampaignsForSource" type="tns:ParamsGetCampaignsForSource" />
+      <xs:element name="paramsGetImportToListStatus" type="tns:ParamsGetImportToListStatus" />
+      <xs:element name="paramsGetLead" type="tns:ParamsGetLead" />
+      <xs:element name="paramsGetLeadActivity" type="tns:ParamsGetLeadActivity" />
+      <xs:element name="paramsGetLeadChanges" type="tns:ParamsGetLeadChanges" />
+      <xs:element name="paramsGetMultipleLeads" type="tns:ParamsGetMultipleLeads" />
+      <xs:element name="paramsImportToList" type="tns:ParamsImportToList" />
+      <xs:element name="paramsListMObjects" type="tns:ParamsListMObjects" />
+      <xs:element name="paramsListOperation" type="tns:ParamsListOperation" />
+      <xs:element name="paramsRequestCampaign" type="tns:ParamsRequestCampaign" />
+      <xs:element name="paramsScheduleCampaign" type="tns:ParamsScheduleCampaign" />
+      <xs:element name="paramsSyncLead" type="tns:ParamsSyncLead" />
+      <xs:element name="paramsSyncMultipleLeads" type="tns:ParamsSyncMultipleLeads" />
+      <xs:element name="paramsSyncCustomObjects" type="tns:ParamsSyncCustomObjects" />
+      <xs:element name="paramsDeleteCustomObjects" type="tns:ParamsDeleteCustomObjects" />
+      <xs:element name="paramsGetCustomObjects" type="tns:ParamsGetCustomObjects" />
+      <xs:element name="paramsMergeLeads" type="tns:ParamsMergeLeads" />
+      <xs:element name="successDeleteMObjects" type="tns:SuccessDeleteMObjects" />
+      <xs:element name="successDescribeMObject" type="tns:SuccessDescribeMObject" />
+      <xs:element name="successGetMObjects" type="tns:SuccessGetMObjects" />
+      <xs:element name="successSyncMObjects" type="tns:SuccessSyncMObjects" />
+      <xs:element name="successGetCampaignsForSource" type="tns:SuccessGetCampaignsForSource" />
+      <xs:element name="successGetImportToListStatus" type="tns:SuccessGetImportToListStatus" />
+      <xs:element name="successGetLead" type="tns:SuccessGetLead" />
+      <xs:element name="successGetLeadActivity" type="tns:SuccessGetLeadActivity" />
+      <xs:element name="successGetLeadChanges" type="tns:SuccessGetLeadChanges" />
+      <xs:element name="successGetMultipleLeads" type="tns:SuccessGetMultipleLeads" />
+      <xs:element name="successImportToList" type="tns:SuccessImportToList" />
+      <xs:element name="successListMObjects" type="tns:SuccessListMObjects" />
+      <xs:element name="successListOperation" type="tns:SuccessListOperation" />
+      <xs:element name="successRequestCampaign" type="tns:SuccessRequestCampaign" />
+      <xs:element name="successScheduleCampaign" type="tns:SuccessScheduleCampaign" />
+      <xs:element name="successSyncLead" type="tns:SuccessSyncLead" />
+      <xs:element name="successSyncMultipleLeads" type="tns:SuccessSyncMultipleLeads" />
+      <xs:element name="successSyncCustomObjects" type="tns:SuccessSyncCustomObjects" />
+      <xs:element name="successDeleteCustomObjects" type="tns:SuccessDeleteCustomObjects" />
+      <xs:element name="successGetCustomObjects" type="tns:SuccessGetCustomObjects" />
+      <xs:element name="successMergeLeads" type="tns:SuccessMergeLeads" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="AuthenticationHeader">
+    <wsdl:part name="authentication" element="tns:AuthenticationHeader" />
+  </wsdl:message>
+  <wsdl:message name="MktowsContextHeader">
+    <wsdl:part name="mktowsContext" element="tns:MktowsContextHeader" />
+  </wsdl:message>
+  <wsdl:message name="DeleteMObjectsRequest">
+    <wsdl:part name="paramsDeleteMObjects" element="tns:paramsDeleteMObjects" />
+  </wsdl:message>
+  <wsdl:message name="DeleteMObjectsResponse">
+    <wsdl:part name="successDeleteMObjects" element="tns:successDeleteMObjects" />
+  </wsdl:message>
+  <wsdl:message name="DescribeMObjectRequest">
+    <wsdl:part name="paramsDescribeMObject" element="tns:paramsDescribeMObject" />
+  </wsdl:message>
+  <wsdl:message name="DescribeMObjectResponse">
+    <wsdl:part name="successDescribeMObject" element="tns:successDescribeMObject" />
+  </wsdl:message>
+  <wsdl:message name="GetMObjectsRequest">
+    <wsdl:part name="paramsGetMObjects" element="tns:paramsGetMObjects" />
+  </wsdl:message>
+  <wsdl:message name="GetMObjectsResponse">
+    <wsdl:part name="successGetMObjects" element="tns:successGetMObjects" />
+  </wsdl:message>
+  <wsdl:message name="SyncMObjectsRequest">
+    <wsdl:part name="paramsSyncMObjects" element="tns:paramsSyncMObjects" />
+  </wsdl:message>
+  <wsdl:message name="SyncMObjectsResponse">
+    <wsdl:part name="successSyncMObjects" element="tns:successSyncMObjects" />
+  </wsdl:message>
+  <wsdl:message name="GetCampaignsForSourceRequest">
+    <wsdl:part name="paramsGetCampaignsForSource" element="tns:paramsGetCampaignsForSource" />
+  </wsdl:message>
+  <wsdl:message name="GetCampaignsForSourceResponse">
+    <wsdl:part name="successGetCampaignsForSource" element="tns:successGetCampaignsForSource" />
+  </wsdl:message>
+  <wsdl:message name="GetImportToListStatusRequest">
+    <wsdl:part name="paramsGetImportToListStatus" element="tns:paramsGetImportToListStatus" />
+  </wsdl:message>
+  <wsdl:message name="GetImportToListStatusResponse">
+    <wsdl:part name="successGetImportToListStatus" element="tns:successGetImportToListStatus" />
+  </wsdl:message>
+  <wsdl:message name="GetLeadRequest">
+    <wsdl:part name="paramsGetLead" element="tns:paramsGetLead" />
+  </wsdl:message>
+  <wsdl:message name="GetLeadResponse">
+    <wsdl:part name="successGetLead" element="tns:successGetLead" />
+  </wsdl:message>
+  <wsdl:message name="GetLeadActivityRequest">
+    <wsdl:part name="paramsGetLeadActivity" element="tns:paramsGetLeadActivity" />
+  </wsdl:message>
+  <wsdl:message name="GetLeadActivityResponse">
+    <wsdl:part name="successGetLeadActivity" element="tns:successGetLeadActivity" />
+  </wsdl:message>
+  <wsdl:message name="GetLeadChangesRequest">
+    <wsdl:part name="paramsGetLeadChanges" element="tns:paramsGetLeadChanges" />
+  </wsdl:message>
+  <wsdl:message name="GetLeadChangesResponse">
+    <wsdl:part name="successGetLeadChanges" element="tns:successGetLeadChanges" />
+  </wsdl:message>
+  <wsdl:message name="GetMultipleLeadsRequest">
+    <wsdl:part name="paramsGetMultipleLeads" element="tns:paramsGetMultipleLeads" />
+  </wsdl:message>
+  <wsdl:message name="GetMultipleLeadsResponse">
+    <wsdl:part name="successGetMultipleLeads" element="tns:successGetMultipleLeads" />
+  </wsdl:message>
+  <wsdl:message name="ImportToListRequest">
+    <wsdl:part name="paramsImportToList" element="tns:paramsImportToList" />
+  </wsdl:message>
+  <wsdl:message name="ImportToListResponse">
+    <wsdl:part name="successImportToList" element="tns:successImportToList" />
+  </wsdl:message>
+  <wsdl:message name="ListMObjectsRequest">
+    <wsdl:part name="paramsListMObjects" element="tns:paramsListMObjects" />
+  </wsdl:message>
+  <wsdl:message name="ListMObjectsResponse">
+    <wsdl:part name="successListMObjects" element="tns:successListMObjects" />
+  </wsdl:message>
+  <wsdl:message name="ListOperationRequest">
+    <wsdl:part name="paramsListOperation" element="tns:paramsListOperation" />
+  </wsdl:message>
+  <wsdl:message name="ListOperationResponse">
+    <wsdl:part name="successListOperation" element="tns:successListOperation" />
+  </wsdl:message>
+  <wsdl:message name="RequestCampaignRequest">
+    <wsdl:part name="paramsRequestCampaign" element="tns:paramsRequestCampaign" />
+  </wsdl:message>
+  <wsdl:message name="RequestCampaignResponse">
+    <wsdl:part name="successRequestCampaign" element="tns:successRequestCampaign" />
+  </wsdl:message>
+  <wsdl:message name="ScheduleCampaignRequest">
+    <wsdl:part name="paramsScheduleCampaign" element="tns:paramsScheduleCampaign" />
+  </wsdl:message>
+  <wsdl:message name="ScheduleCampaignResponse">
+    <wsdl:part name="successScheduleCampaign" element="tns:successScheduleCampaign" />
+  </wsdl:message>
+  <wsdl:message name="SyncLeadRequest">
+    <wsdl:part name="paramsSyncLead" element="tns:paramsSyncLead" />
+  </wsdl:message>
+  <wsdl:message name="SyncLeadResponse">
+    <wsdl:part name="successSyncLead" element="tns:successSyncLead" />
+  </wsdl:message>
+  <wsdl:message name="SyncMultipleLeadsRequest">
+    <wsdl:part name="paramsSyncMultipleLeads" element="tns:paramsSyncMultipleLeads" />
+  </wsdl:message>
+  <wsdl:message name="SyncMultipleLeadsResponse">
+    <wsdl:part name="successSyncMultipleLeads" element="tns:successSyncMultipleLeads" />
+  </wsdl:message>
+  <wsdl:message name="SyncCustomObjectsRequest">
+    <wsdl:part name="paramsSyncCustomObjects" element="tns:paramsSyncCustomObjects" />
+  </wsdl:message>
+  <wsdl:message name="SyncCustomObjectsResponse">
+    <wsdl:part name="successSyncCustomObjects" element="tns:successSyncCustomObjects" />
+  </wsdl:message>
+  <wsdl:message name="DeleteCustomObjectsRequest">
+    <wsdl:part name="paramsDeleteCustomObjects" element="tns:paramsDeleteCustomObjects" />
+  </wsdl:message>
+  <wsdl:message name="DeleteCustomObjectsResponse">
+    <wsdl:part name="successDeleteCustomObjects" element="tns:successDeleteCustomObjects" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomObjectsRequest">
+    <wsdl:part name="paramsGetCustomObjects" element="tns:paramsGetCustomObjects" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomObjectsResponse">
+    <wsdl:part name="successGetCustomObjects" element="tns:successGetCustomObjects" />
+  </wsdl:message>
+  <wsdl:message name="MergeLeadsRequest">
+    <wsdl:part name="paramsMergeLeads" element="tns:paramsMergeLeads" />
+  </wsdl:message>
+  <wsdl:message name="MergeLeadsResponse">
+    <wsdl:part name="successMergeLeads" element="tns:successMergeLeads" />
+  </wsdl:message>
+  <wsdl:portType name="MktowsPort">
+    <wsdl:operation name="deleteMObjects">
+      <wsdl:documentation>Delete one or more MObject.
+      </wsdl:documentation>
+      <wsdl:input message="tns:DeleteMObjectsRequest" />
+      <wsdl:output message="tns:DeleteMObjectsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="describeMObject">
+      <wsdl:documentation>Get meta data for a MObject.
+      </wsdl:documentation>
+      <wsdl:input message="tns:DescribeMObjectRequest" />
+      <wsdl:output message="tns:DescribeMObjectResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getMObjects">
+      <wsdl:documentation>Get one or more MObject.
+      </wsdl:documentation>
+      <wsdl:input message="tns:GetMObjectsRequest" />
+      <wsdl:output message="tns:GetMObjectsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="syncMObjects">
+      <wsdl:documentation>Create, update, or upsert MObject.
+      </wsdl:documentation>
+      <wsdl:input message="tns:SyncMObjectsRequest" />
+      <wsdl:output message="tns:SyncMObjectsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getCampaignsForSource">
+      <wsdl:documentation>Get a list campaigns.
+      </wsdl:documentation>
+      <wsdl:input message="tns:GetCampaignsForSourceRequest" />
+      <wsdl:output message="tns:GetCampaignsForSourceResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getImportToListStatus">
+      <wsdl:documentation>Provides information regarding the status of list import.
+      </wsdl:documentation>
+      <wsdl:input message="tns:GetImportToListStatusRequest" />
+      <wsdl:output message="tns:GetImportToListStatusResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getLead">
+      <wsdl:documentation>Get all details about a lead.
+      </wsdl:documentation>
+      <wsdl:input message="tns:GetLeadRequest" />
+      <wsdl:output message="tns:GetLeadResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getLeadActivity">
+      <wsdl:documentation>Get all activity log details about a lead.
+      </wsdl:documentation>
+      <wsdl:input message="tns:GetLeadActivityRequest" />
+      <wsdl:output message="tns:GetLeadActivityResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getLeadChanges">
+      <wsdl:documentation>Get changes for all leads.
+      </wsdl:documentation>
+      <wsdl:input message="tns:GetLeadChangesRequest" />
+      <wsdl:output message="tns:GetLeadChangesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getMultipleLeads">
+      <wsdl:documentation>Get all details about one or more leads.
+      </wsdl:documentation>
+      <wsdl:input message="tns:GetMultipleLeadsRequest" />
+      <wsdl:output message="tns:GetMultipleLeadsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="importToList">
+      <wsdl:documentation>Imports the list from web file info
+      </wsdl:documentation>
+      <wsdl:input message="tns:ImportToListRequest" />
+      <wsdl:output message="tns:ImportToListResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="listMObjects">
+      <wsdl:documentation>Send a Marketo email.
+      </wsdl:documentation>
+      <wsdl:input message="tns:ListMObjectsRequest" />
+      <wsdl:output message="tns:ListMObjectsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="listOperation">
+      <wsdl:documentation>Perform an operation on a Marketo List, like add lead or remove lead.
+      </wsdl:documentation>
+      <wsdl:input message="tns:ListOperationRequest" />
+      <wsdl:output message="tns:ListOperationResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="requestCampaign">
+      <wsdl:documentation>Request to add a set of leads to a campaign.
+      </wsdl:documentation>
+      <wsdl:input message="tns:RequestCampaignRequest" />
+      <wsdl:output message="tns:RequestCampaignResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="scheduleCampaign">
+      <wsdl:documentation>Request to add tokens to a schedule campaign.
+      </wsdl:documentation>
+      <wsdl:input message="tns:ScheduleCampaignRequest" />
+      <wsdl:output message="tns:ScheduleCampaignResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="syncLead">
+      <wsdl:documentation>Create or update a lead.
+      </wsdl:documentation>
+      <wsdl:input message="tns:SyncLeadRequest" />
+      <wsdl:output message="tns:SyncLeadResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="syncMultipleLeads">
+      <wsdl:documentation>Create or update one or more leads.
+      </wsdl:documentation>
+      <wsdl:input message="tns:SyncMultipleLeadsRequest" />
+      <wsdl:output message="tns:SyncMultipleLeadsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="syncCustomObjects">
+      <wsdl:documentation>Update, Insert, or Upsert custom object records
+      </wsdl:documentation>
+      <wsdl:input message="tns:SyncCustomObjectsRequest" />
+      <wsdl:output message="tns:SyncCustomObjectsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteCustomObjects">
+      <wsdl:documentation>Delete custom object records
+      </wsdl:documentation>
+      <wsdl:input message="tns:DeleteCustomObjectsRequest" />
+      <wsdl:output message="tns:DeleteCustomObjectsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getCustomObjects">
+      <wsdl:documentation>Get custom object records
+      </wsdl:documentation>
+      <wsdl:input message="tns:GetCustomObjectsRequest" />
+      <wsdl:output message="tns:GetCustomObjectsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="mergeLeads">
+      <wsdl:documentation>Merge Leads
+      </wsdl:documentation>
+      <wsdl:input message="tns:MergeLeadsRequest" />
+      <wsdl:output message="tns:MergeLeadsResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MktowsApiSoapBinding" type="tns:MktowsPort">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="deleteMObjects">
+      <soap:operation soapAction="http://www.marketo.com/mktows/deleteMObjects" />
+      <wsdl:input>
+        <soap:header message="tns:AuthenticationHeader" part="authentication" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="describeMObject">
+      <soap:operation soapAction="http://www.marketo.com/mktows/describeMObject" />
+      <wsdl:input>
+        <soap:header message="tns:AuthenticationHeader" part="authentication" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMObjects">
+      <soap:operation soapAction="http://www.marketo.com/mktows/getMObjects" />
+      <wsdl:input>
+        <soap:header message="tns:AuthenticationHeader" part="authentication" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="syncMObjects">
+      <soap:operation soapAction="http://www.marketo.com/mktows/syncMObjects" />
+      <wsdl:input>
+        <soap:header message="tns:AuthenticationHeader" part="authentication" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCampaignsForSource">
+      <soap:operation soapAction="http://www.marketo.com/mktows/getCampaignsForSource" />
+      <wsdl:input>
+        <soap:header message="tns:AuthenticationHeader" part="authentication" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getImportToListStatus">
+      <soap:operation soapAction="http://www.marketo.com/mktows/getImportToListStatus" />
+      <wsdl:input>
+        <soap:header message="tns:AuthenticationHeader" part="authentication" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLead">
+      <soap:operation soapAction="http://www.marketo.com/mktows/getLead" />
+      <wsdl:input>
+        <soap:header message="tns:AuthenticationHeader" part="authentication" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLeadActivity">
+      <soap:operation soapAction="http://www.marketo.com/mktows/getLeadActivity" />
+      <wsdl:input>
+        <soap:header message="tns:AuthenticationHeader" part="authentication" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLeadChanges">
+      <soap:operation soapAction="http://www.marketo.com/mktows/getLeadChanges" />
+      <wsdl:input>
+        <soap:header message="tns:AuthenticationHeader" part="authentication" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMultipleLeads">
+      <soap:operation soapAction="http://www.marketo.com/mktows/getMultipleLeads" />
+      <wsdl:input>
+        <soap:header message="tns:AuthenticationHeader" part="authentication" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="importToList">
+      <soap:operation soapAction="http://www.marketo.com/mktows/importToList" />
+      <wsdl:input>
+        <soap:header message="tns:AuthenticationHeader" part="authentication" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listMObjects">
+      <soap:operation soapAction="http://www.marketo.com/mktows/listMObjects" />
+      <wsdl:input>
+        <soap:header message="tns:AuthenticationHeader" part="authentication" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listOperation">
+      <soap:operation soapAction="http://www.marketo.com/mktows/listOperation" />
+      <wsdl:input>
+        <soap:header message="tns:AuthenticationHeader" part="authentication" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="requestCampaign">
+      <soap:operation soapAction="http://www.marketo.com/mktows/requestCampaign" />
+      <wsdl:input>
+        <soap:header message="tns:AuthenticationHeader" part="authentication" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="scheduleCampaign">
+      <soap:operation soapAction="http://www.marketo.com/mktows/scheduleCampaign" />
+      <wsdl:input>
+        <soap:header message="tns:AuthenticationHeader" part="authentication" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="syncLead">
+      <soap:operation soapAction="http://www.marketo.com/mktows/syncLead" />
+      <wsdl:input>
+        <soap:header message="tns:AuthenticationHeader" part="authentication" use="literal" />
+        <soap:header message="tns:MktowsContextHeader" part="mktowsContext" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="syncMultipleLeads">
+      <soap:operation soapAction="http://www.marketo.com/mktows/syncMultipleLeads" />
+      <wsdl:input>
+        <soap:header message="tns:AuthenticationHeader" part="authentication" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="syncCustomObjects">
+      <soap:operation soapAction="http://www.marketo.com/mktows/syncCustomObjects" />
+      <wsdl:input>
+        <soap:header message="tns:AuthenticationHeader" part="authentication" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteCustomObjects">
+      <soap:operation soapAction="http://www.marketo.com/mktows/deleteCustomObjects" />
+      <wsdl:input>
+        <soap:header message="tns:AuthenticationHeader" part="authentication" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCustomObjects">
+      <soap:operation soapAction="http://www.marketo.com/mktows/getCustomObjects" />
+      <wsdl:input>
+        <soap:header message="tns:AuthenticationHeader" part="authentication" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="mergeLeads">
+      <soap:operation soapAction="http://www.marketo.com/mktows/mergeLeads" />
+      <wsdl:input>
+        <soap:header message="tns:AuthenticationHeader" part="authentication" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MktMktowsApiService">
+    <wsdl:port name="MktowsApiSoapPort" binding="tns:MktowsApiSoapBinding">
+      <soap:address location="https://na-d.marketo.com/soap/mktows/2_0" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
